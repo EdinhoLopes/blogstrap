@@ -1,9 +1,7 @@
 <h1>Articles</h1>
-<%= @articles.inspect %>
 
 <ul>
   <% @articles.each do |article| %>
     <li><%= article.title %></li>
-    <li><%= article.body %></li>
   <% end %>  
 </ul>
