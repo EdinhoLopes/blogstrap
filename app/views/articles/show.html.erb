@@ -2,7 +2,7 @@
   <h2 class="blog-post-title mb-1"><%= @article.title %></h2>
 
   <p class="blog-post-meta">
-    <%= month_day(@article.created_at) %> by <%= @article.user.email %>
+    <%= render 'article_detail', article: @article %>
   </p>
 
   <p>
@@ -10,7 +10,7 @@
   </p>
 
   <%= link_to "Edit", edit_article_path(@article),
-   class: "btn btn-secondary" if policy(@article).update? %>
+   class: "btn btn-primary" if policy(@article).update? %>
   <%= link_to "Destroy", article_path(@article), 
    method: :delete, data: {confirm: "Are you sure?"},
    class: "btn btn-danger" if policy(@article).destroy?%>
