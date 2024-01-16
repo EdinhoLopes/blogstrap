@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(articles_params)
 
     if @article.save
-      redirect_to @article
+      redirect_to @article, notice: "Article was successfully created."
     else
       render :new
     end
@@ -37,7 +37,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update(articles_params)
-      redirect_to @article
+      redirect_to @article, notice: "Article was successfully updated."
     else
       render :edit
     end
@@ -47,12 +47,12 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     @article.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: "Article was successfully destroyed."
   end
   
   private
 
   def articles_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :category_id)
   end
 end
