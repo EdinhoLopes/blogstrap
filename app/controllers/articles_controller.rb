@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_article, only: %i[show edit update destroy]
+
   def index
     @highlights = Article.desc_order.first(3)
     
@@ -11,16 +14,14 @@ class ArticlesController < ApplicationController
 
   end
 
-  def show
-    @article = Article.find(params[:id])
-  end
+  def show; end
 
   def new
-    @article = Article.new
+    @article = current_user.articles.new
   end
 
   def create
-    @article = Article.new(articles_params)
+    @article = current_user.articles.new(articles_params)
 
     if @article.save
       redirect_to @article, notice: "Article was successfully created."
@@ -29,13 +30,9 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def edit
-    @article = Article.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @article = Article.find(params[:id])
-
     if @article.update(articles_params)
       redirect_to @article, notice: "Article was successfully updated."
     else
@@ -44,13 +41,16 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
 
     @article.destroy
     redirect_to root_path, notice: "Article was successfully destroyed."
   end
   
   private
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
 
   def articles_params
     params.require(:article).permit(:title, :body, :category_id)
