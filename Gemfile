@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+#source 'http://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.1'
@@ -35,3 +36,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "simple_form", "~> 5.3"
 gem "kaminari", "~> 1.2"
 gem "devise", "~> 4.9"
+
+gem "pundit", "~> 2.3"
+gem "rolify", "~> 6.0"
